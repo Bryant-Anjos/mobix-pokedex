@@ -1,16 +1,22 @@
+import '@config/reactotronConfig'
+
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import * as eva from '@eva-design/eva'
+import { Provider as StoreProvider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { ApplicationProvider } from '@ui-kitten/components'
 
-const App = () => {
-  return (
-    <View style={styles.view}>
-      <Text>Hello darkness my old friend!</Text>
-    </View>
-  )
-}
+import Routes from '@routes'
+import { persistor, store } from '@store/index'
 
-const styles = StyleSheet.create({
-  view: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-})
+const App = () => (
+  <StoreProvider store={store}>
+    <PersistGate persistor={persistor}>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Routes />
+      </ApplicationProvider>
+    </PersistGate>
+  </StoreProvider>
+)
 
 export default App
