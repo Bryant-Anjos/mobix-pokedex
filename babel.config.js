@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
@@ -16,6 +16,7 @@ module.exports = {
           '@hooks': path.join(__dirname, 'src', 'hooks'),
           '@lang': path.join(__dirname, 'src', 'lang'),
           '@lib': path.join(__dirname, 'src', 'lib'),
+          '@hoc': path.join(__dirname, 'src', 'hoc'),
           '@routes': path.join(__dirname, 'src', 'routes'),
           '@screens': path.join(__dirname, 'src', 'screens'),
           '@server': path.join(__dirname, 'src', 'server'),
@@ -27,4 +28,4 @@ module.exports = {
       },
     ],
   ],
-};
+}
