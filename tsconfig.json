@@ -31,7 +31,7 @@
       "@services/*": ["./services/*"],
       "@store/*": ["./store/*"],
       "@styles/*": ["./styles/*"],
-      "@theme/*": ["./theme/*"],
+      "@theme": ["./theme"],
       "@@types/*": ["./types/*"],
       "@utils/*": ["./utils/*"]
     }
