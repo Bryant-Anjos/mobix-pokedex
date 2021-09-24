@@ -1,20 +1,20 @@
 import '@config/reactotronConfig'
 
 import React from 'react'
-import * as eva from '@eva-design/eva'
+import { Provider as PaperProvider } from 'react-native-paper'
 import { Provider as StoreProvider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { ApplicationProvider } from '@ui-kitten/components'
 
 import Routes from '@routes'
 import { persistor, store } from '@store/index'
+import { DefaultTheme } from '@theme'
 
 const App = () => (
   <StoreProvider store={store}>
     <PersistGate persistor={persistor}>
-      <ApplicationProvider {...eva} theme={eva.light}>
+      <PaperProvider theme={DefaultTheme as ReactNativePaper.Theme}>
         <Routes />
-      </ApplicationProvider>
+      </PaperProvider>
     </PersistGate>
   </StoreProvider>
 )

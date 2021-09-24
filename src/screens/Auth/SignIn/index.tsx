@@ -1,21 +1,48 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Layout, Text } from '@ui-kitten/components'
+import React, { useCallback } from 'react'
+import {
+  Image,
+  ImageBackground,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  View,
+} from 'react-native'
+
+import bg from '@assets/background.png'
+import logo from '@assets/logo.png'
+
+import Login from './components/Login'
+import styles from './styles'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 const SignIn = () => {
+  const dismiss = useCallback(() => {
+    Keyboard.dismiss()
+  }, [])
+
   return (
-    <Layout style={styles.view}>
-      <Text>Hello darkness my old friend!</Text>
-    </Layout>
+    <TouchableWithoutFeedback onPress={dismiss}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardView}
+      >
+        <ImageBackground style={styles.conteiner} source={bg}>
+          <StatusBar
+            translucent
+            barStyle="dark-content"
+            backgroundColor="transparent"
+          />
+
+          <View style={styles.view}>
+            <Image source={logo} resizeMode="contain" style={styles.logo} />
+          </View>
+
+          <Login />
+        </ImageBackground>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   )
 }
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
 
 export default SignIn
