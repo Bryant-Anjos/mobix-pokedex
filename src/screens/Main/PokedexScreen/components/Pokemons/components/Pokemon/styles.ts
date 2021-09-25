@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 12,
     fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
   image: {
     position: 'absolute',

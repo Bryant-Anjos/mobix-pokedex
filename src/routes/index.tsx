@@ -29,9 +29,9 @@ function Routes() {
     <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {signed ? (
-          <Stack.Screen name="AuthRoutes" component={AuthRoutes} />
-        ) : (
           <Stack.Screen name="MainRoutes" component={MainRoutes} />
+        ) : (
+          <Stack.Screen name="AuthRoutes" component={AuthRoutes} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
