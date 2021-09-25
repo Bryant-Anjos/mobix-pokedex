@@ -26,7 +26,7 @@ const Filters = (props: Props) => {
           <IconButton icon="close" onPress={closeModal} />
         </View>
 
-        <View style={{ flex: 1 }}>
+        <View style={styles.typesWrapper}>
           <Text style={styles.subtitle}>Tipo</Text>
           <Types />
         </View>

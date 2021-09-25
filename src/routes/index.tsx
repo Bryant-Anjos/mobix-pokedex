@@ -10,6 +10,15 @@ import { ApplicationState } from '@store/types'
 import AuthRoutes from './auth.routes'
 import MainRoutes from './main.routes'
 
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList {
+      AuthRoutes: undefined
+      MainRoutes: undefined
+    }
+  }
+}
+
 const Stack = createStackNavigator()
 
 function Routes() {

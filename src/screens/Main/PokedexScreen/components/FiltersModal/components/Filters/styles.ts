@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
     color: '#4A7DFF',
     textDecorationLine: 'underline',
   },
+  typesWrapper: {
+    flex: 1,
+  },
   subtitle: {
     fontSize: 16,
     fontWeight: '600',
