@@ -120,7 +120,7 @@ const Login = () => {
         <Card.Title
           title="Bem vindo"
           subtitle="insira os seus dados para acessar"
-          titleStyle={{ fontSize: 24 }}
+          titleStyle={styles.titleStyle}
         />
 
         <TextInput

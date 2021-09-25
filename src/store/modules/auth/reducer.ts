@@ -4,7 +4,7 @@ import { AuthState } from './types'
 
 const INITIAL_STATE: AuthState = {
   user: undefined,
-  signed: false,
+  signed: true,
   loading: false,
 }
 
