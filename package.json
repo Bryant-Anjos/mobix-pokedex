@@ -1,6 +1,6 @@
 {
   "name": "pokedex",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Bryant Moreira dos Anjos",
   "scripts": {
     "android": "react-native run-android",
