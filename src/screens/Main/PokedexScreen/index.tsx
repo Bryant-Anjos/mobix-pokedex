@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import {
   Image,
   Keyboard,
@@ -12,12 +12,15 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import logo from '@assets/logo.png'
 
 import styles from './styles'
-import Search from './components/Search'
 import Chips from './components/Chips'
+import FiltersModal, { FiltersModalRef } from './components/FiltersModal'
 import Pokemons from './components/Pokemons'
+import Search from './components/Search'
 import { IconButton } from 'react-native-paper'
 
 const ListScreen = () => {
+  const modalRef = useRef<FiltersModalRef>(null)
+
   const dismiss = useCallback(() => {
     Keyboard.dismiss()
   }, [])
@@ -35,9 +38,10 @@ const ListScreen = () => {
             <Search />
             <IconButton
               icon="tune"
-              onPress={() => console.log('pressed')}
+              onPress={() => modalRef.current?.show()}
               style={styles.icon}
             />
+            <FiltersModal ref={modalRef} />
           </View>
           <Chips />
           <Pokemons />
