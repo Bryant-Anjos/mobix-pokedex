@@ -2,13 +2,13 @@ import React from 'react'
 
 import { createStackNavigator } from '@react-navigation/stack'
 
-import * as Screens from '@screens/Auth'
+import * as Screens from '@screens/Main'
 
 const Stack = createStackNavigator()
 
 const MainRoutes = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="MainScreen" component={Screens.SignIn} />
+    <Stack.Screen name="PokedexScreen" component={Screens.PokedexScreen} />
   </Stack.Navigator>
 )
 
