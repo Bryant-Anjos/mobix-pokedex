@@ -5,13 +5,18 @@ const { width } = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'flex-end',
     height: width * 0.27,
     width: '46%',
     marginVertical: 30,
     marginHorizontal: '2%',
     borderRadius: 20,
+    overflow: 'hidden',
+  },
+  touchable: {
+    flex: 1,
+    justifyContent: 'flex-end',
     padding: 12,
+    borderRadius: 20,
   },
   label: {
     alignItems: 'center',
