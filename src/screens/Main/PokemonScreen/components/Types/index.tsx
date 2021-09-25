@@ -1,13 +1,28 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'react-native-paper'
+import { Chip } from 'react-native-paper'
 
-// import styles from './styles'
+import styles from './styles'
 
-const Types = () => {
+type Props = {
+  color: string
+  types: string[]
+}
+
+const Types = (props: Props) => {
+  const { color, types = [] } = props
+
   return (
-    <View>
-      <Text>Types</Text>
+    <View style={styles.wrapper}>
+      {types.map(type => (
+        <Chip
+          key={type}
+          style={[styles.chip, { backgroundColor: color }]}
+          textStyle={styles.text}
+        >
+          {type}
+        </Chip>
+      ))}
     </View>
   )
 }
