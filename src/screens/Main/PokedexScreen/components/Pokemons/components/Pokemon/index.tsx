@@ -1,49 +1,47 @@
 import React from 'react'
 import { Text, TouchableRipple } from 'react-native-paper'
 import LinearGradient from 'react-native-linear-gradient'
-import { darken, lighten } from 'polished'
+import { darken } from 'polished'
 import { Image, View } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
 import styles from './styles'
+import { IPokemon } from '@services/api/pokemon/types'
 
-const color = '#7159c7'
-
-const getGradient = (baseColor: string): [string, string, string] => {
-  return [lighten(0.2, baseColor), baseColor, darken(0.2, baseColor)]
+type Props = {
+  pokemon: IPokemon
 }
 
-const Pokemons = () => {
+const Pokemon = (props: Props) => {
+  const { pokemon } = props
   const navigation = useNavigation()
 
   const navigateToPokemonScreen = () => {
     navigation.navigate('PokemonScreen', {
-      pokemonNumber: 1,
+      pokemonNumber: pokemon.id,
     })
   }
 
   return (
     <LinearGradient
-      colors={getGradient(color)}
+      colors={pokemon.palete}
       start={{ x: 1, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={styles.gradient}
     >
       <Image
         resizeMode="contain"
-        source={{
-          uri: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
-        }}
+        source={{ uri: pokemon.image }}
         style={styles.image}
       />
       <View style={styles.container}>
         <TouchableRipple
-          rippleColor={darken(0.4, color)}
+          rippleColor={darken(0.4, pokemon.color)}
           onPress={navigateToPokemonScreen}
           style={styles.touchable}
         >
           <View style={styles.label}>
-            <Text style={styles.text}>Pokémon</Text>
+            <Text style={styles.text}>{pokemon.name}</Text>
           </View>
         </TouchableRipple>
       </View>
@@ -51,4 +49,4 @@ const Pokemons = () => {
   )
 }
 
-export default Pokemons
+export default Pokemon

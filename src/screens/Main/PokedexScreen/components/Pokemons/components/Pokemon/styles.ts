@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   },
   image: {
     position: 'absolute',
+    overflow: 'hidden',
     width: '100%',
     height: '100%',
     top: -35,
