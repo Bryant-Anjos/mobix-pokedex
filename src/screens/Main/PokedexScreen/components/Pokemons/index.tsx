@@ -20,7 +20,7 @@ const Pokemons = () => {
 
   useEffect(() => {
     switch (result[0]) {
-      case State.SUCESS: {
+      case State.SUCCESS: {
         const [, newPokemons] = result
         setPokemons(p => [...p, ...newPokemons])
         break

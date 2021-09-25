@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#3F3F3F',
+    textTransform: 'capitalize',
   },
   number: {
     fontSize: 16,

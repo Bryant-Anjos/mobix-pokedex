@@ -6,14 +6,14 @@ import { IPokemon } from '@services/api/pokemon/types'
 export enum State {
   IDLE,
   LOADING,
-  SUCESS,
+  SUCCESS,
   FAILURE,
 }
 
 type Result =
   | [State.IDLE, undefined]
   | [State.LOADING, undefined]
-  | [State.SUCESS, IPokemon[]]
+  | [State.SUCCESS, IPokemon[]]
   | [State.FAILURE, Error]
 
 export const useListPokemons = () => {
@@ -25,7 +25,7 @@ export const useListPokemons = () => {
     setOffset(value => value + 20)
 
     list({ offset })
-      .then(response => setResult([State.SUCESS, response]))
+      .then(response => setResult([State.SUCCESS, response]))
       .catch(error => setResult([State.FAILURE, error]))
   }
 
