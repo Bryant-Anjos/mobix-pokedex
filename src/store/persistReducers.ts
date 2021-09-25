@@ -10,7 +10,7 @@ export default (reducers: Reducer) => {
     {
       key,
       storage: AsyncStorage,
-      whitelist: ['auth', 'user', 'client'],
+      whitelist: ['auth'],
     },
     reducers,
   )

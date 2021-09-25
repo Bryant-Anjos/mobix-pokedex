@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState } from 'react'
 
 export enum State {
@@ -24,23 +25,15 @@ export const useLogin = () => {
   const signIn = (email: string, password: string) => {
     setResult([State.LOADING, undefined])
 
-    const getUser = () =>
-      new Promise<User>((resolve, reject) => {
-        setTimeout(() => {
-          if (email === 'teste@email.com' && password === '123456') {
-            resolve({
-              name: 'Treinador',
-              email: 'teste@email.com',
-            })
-          } else {
-            reject(new Error('Email ou senha incorretos.'))
-          }
-        }, 2000)
+    axios
+      .post('/api/login', {
+        email,
+        password,
       })
-
-    getUser()
-      .then(user => setResult([State.SUCCESS, user]))
-      .catch(error => setResult([State.FAILURE, error]))
+      .then(({ data }) => setResult([State.SUCCESS, data.user]))
+      .catch(error =>
+        setResult([State.FAILURE, Error(error.response.data.message)]),
+      )
   }
 
   return { result, signIn }

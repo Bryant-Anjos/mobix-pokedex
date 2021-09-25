@@ -9,12 +9,20 @@ import {
   Text,
 } from 'react-native-paper'
 import Snackbar from 'react-native-snackbar'
+import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
+
+import * as actions from '@store/modules/auth/actions'
+
+import server from '@server/app'
 
 import styles from './styles'
 import { State, useLogin } from './useLogin'
 
+server.start()
+
 const Login = () => {
+  const dispatch = useDispatch()
   const { result, signIn } = useLogin()
 
   const passwordRef = useRef<RNTextInput>(null)
@@ -35,12 +43,14 @@ const Login = () => {
   useEffect(() => {
     switch (result[0]) {
       case State.SUCCESS: {
+        server.stop()
         const [, user] = result
         Snackbar.show({
           text: `Login realizado por ${user.name}`,
           duration: Snackbar.LENGTH_LONG,
           backgroundColor: Colors.green500,
         })
+        dispatch(actions.signIn(user))
         break
       }
       case State.FAILURE: {
@@ -54,7 +64,7 @@ const Login = () => {
       }
       default:
     }
-  }, [result])
+  }, [dispatch, result])
 
   const toggleVisibility = useCallback(() => {
     setVisible(!visible)
