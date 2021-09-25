@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
   content: {
     justifyContent: 'flex-end',
   },
+  loading: {
+    marginVertical: 5,
+  },
 })
 
 export default styles
