@@ -18,11 +18,13 @@ type Result =
 
 export const useListPokemons = () => {
   const [result, setResult] = useState<Result>([State.IDLE, undefined])
+  const [offset, setOffset] = useState(0)
 
   const listPokemons = () => {
     setResult([State.LOADING, undefined])
+    setOffset(value => value + 20)
 
-    list()
+    list({ offset })
       .then(response => setResult([State.SUCESS, response]))
       .catch(error => setResult([State.FAILURE, error]))
   }

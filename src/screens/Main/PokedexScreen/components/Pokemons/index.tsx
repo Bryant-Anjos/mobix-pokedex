@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 
 import { IPokemon } from '@services/api/pokemon/types'
 
 import Pokemon from './components/Pokemon'
 import styles from './styles'
 import { State, useListPokemons } from './useListPokemons'
+import { ActivityIndicator } from 'react-native-paper'
 
 const Pokemons = () => {
   const { result, listPokemons } = useListPokemons()
@@ -27,6 +28,17 @@ const Pokemons = () => {
     }
   }, [result])
 
+  const renderFooter = () => {
+    if (result[0] !== State.LOADING) {
+      return null
+    }
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
+
   return (
     <FlatList
       style={styles.container}
@@ -36,6 +48,9 @@ const Pokemons = () => {
       data={pokemons}
       keyExtractor={pokemon => pokemon.name}
       renderItem={({ item }) => <Pokemon pokemon={item} />}
+      onEndReached={listPokemons}
+      onEndReachedThreshold={0.1}
+      ListFooterComponent={renderFooter}
     />
   )
 }

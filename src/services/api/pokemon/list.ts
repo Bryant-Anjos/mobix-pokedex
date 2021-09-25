@@ -6,8 +6,8 @@ import { getGradient } from '@utils/getGradient'
 import { getPokemonImage } from '@utils/getPokemonImage'
 
 type Pagination = {
-  offset: number
-  limit: number
+  offset?: number
+  limit?: number
 }
 
 export interface IPokemon {
