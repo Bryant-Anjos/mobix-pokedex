@@ -1,14 +1,23 @@
 import React from 'react'
-import { View } from 'react-native'
-import { Text } from 'react-native-paper'
+import { ScrollView } from 'react-native'
 
-// import { Container } from './styles';
+import Header from './components/Header'
+import Infos from './components/Infos'
+import Sprite from './components/Sprite'
+import Types from './components/Types'
+import styles from './styles'
 
 const PokemonScreen = () => {
   return (
-    <View>
-      <Text>Pokémon</Text>
-    </View>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
+      <Header />
+      <Types />
+      <Sprite />
+      <Infos />
+    </ScrollView>
   )
 }
 

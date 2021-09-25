@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from 'react-native-paper'
 
 const styles = StyleSheet.create({
   keyboardView: {
@@ -10,7 +9,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 25,
     height: '100%',
-    backgroundColor: Colors.white,
   },
   logo: {
     width: 117,

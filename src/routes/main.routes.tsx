@@ -18,7 +18,17 @@ const Stack = createStackNavigator()
 const MainRoutes = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="PokedexScreen" component={Screens.PokedexScreen} />
-    <Stack.Screen name="PokemonScreen" component={Screens.PokemonScreen} />
+    <Stack.Screen
+      name="PokemonScreen"
+      component={Screens.PokemonScreen}
+      options={{
+        headerShown: true,
+        headerTitle: '',
+        headerStyle: {
+          elevation: 0,
+        },
+      }}
+    />
   </Stack.Navigator>
 )
 

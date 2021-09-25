@@ -4,19 +4,22 @@ import { Colors } from 'react-native-paper'
 const { width } = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
-  container: {
+  gradient: {
     height: width * 0.27,
     width: '46%',
     marginVertical: 30,
     marginHorizontal: '2%',
     borderRadius: 20,
+  },
+  container: {
+    flex: 1,
     overflow: 'hidden',
+    borderRadius: 20,
   },
   touchable: {
     flex: 1,
     justifyContent: 'flex-end',
     padding: 12,
-    borderRadius: 20,
   },
   label: {
     alignItems: 'center',
@@ -28,6 +31,12 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  image: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    top: -35,
   },
 })
 
