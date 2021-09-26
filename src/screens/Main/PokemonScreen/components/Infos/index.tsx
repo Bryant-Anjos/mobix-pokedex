@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { IAbout, IStats } from '@services/api/pokemon/types'
+import { IAbout, IEvolution, IStats } from '@services/api/pokemon/types'
 
 import About from './components/About'
 import Evolution from './components/Evolution'
@@ -13,10 +13,11 @@ type Props = {
   color: string
   about: IAbout[]
   stats: IStats[]
+  evolution: IEvolution[]
 }
 
 const Infos = (props: Props) => {
-  const { about, color, stats } = props
+  const { about, color, evolution, stats } = props
 
   const tabs: Tab[] = [
     {
@@ -32,6 +33,7 @@ const Infos = (props: Props) => {
     {
       name: 'Evolução',
       component: Evolution,
+      props: { evolution },
     },
   ]
 

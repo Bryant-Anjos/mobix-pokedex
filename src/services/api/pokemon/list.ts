@@ -1,9 +1,8 @@
 import axios from 'axios'
 
 import api from '@services/api'
-import { mapTypeToColor } from '@utils/mapTypeToColor'
-import { getGradient } from '@utils/getGradient'
-import { getPokemonImage } from '@utils/getPokemonImage'
+
+import { mapPokemonBasic } from './mappers/mapPokemonBasic'
 
 type Pagination = {
   offset?: number
@@ -27,22 +26,9 @@ const list = async (pagination?: Pagination): Promise<IPokemon[]> => {
     .then(async response => {
       return await Promise.all(
         response.data.results.map(async (data: any) => {
-          return await axios.get(data.url).then(({ data: pokemon }: any) => {
-            const { id, name } = pokemon
-            const type = pokemon.types[0].type.name
-            const color = mapTypeToColor(type)
-            const image = getPokemonImage(id)
-            const palete = getGradient(color)
-
-            return {
-              id,
-              name,
-              type,
-              color,
-              image,
-              palete,
-            } as IPokemon
-          })
+          return await axios
+            .get(data.url)
+            .then(({ data: pokemon }: any) => mapPokemonBasic(pokemon))
         }),
       )
     })

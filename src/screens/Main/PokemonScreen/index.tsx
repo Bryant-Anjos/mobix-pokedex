@@ -36,6 +36,7 @@ const PokemonScreen = (props: Props) => {
             color={pokemon.color}
             about={pokemon.about}
             stats={pokemon.stats}
+            evolution={pokemon.evolution}
           />
         </ScrollView>
       )
