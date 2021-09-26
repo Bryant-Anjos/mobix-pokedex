@@ -24,27 +24,28 @@ const users: User[] = [
   },
 ]
 
-const server = new Server({
-  routes() {
-    this.passthrough('https://pokeapi.co/api/v2/***')
-    this.timing = 1000
+const createServer = () =>
+  new Server({
+    routes() {
+      this.passthrough('https://pokeapi.co/api/v2/***')
+      this.passthrough(
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/***',
+      )
+      this.timing = 1000
 
-    this.post('/api/login', (_schema, request) => {
-      let req = JSON.parse(request.requestBody)
-      const user = users.find(u => u.email === req.email)
+      this.post('/api/login', (_schema, request) => {
+        let req = JSON.parse(request.requestBody)
+        const user = users.find(u => u.email === req.email)
 
-      if (!user || user.password !== req.password) {
-        return new Response(400, undefined, {
-          message: 'Usuário ou senha incorreto.',
-        })
-      }
+        if (!user || user.password !== req.password) {
+          return new Response(400, undefined, {
+            message: 'Usuário ou senha incorreto.',
+          })
+        }
 
-      return new Response(200, undefined, { user })
-    })
-  },
-})
+        return new Response(200, undefined, { user })
+      })
+    },
+  })
 
-export default {
-  start: () => server,
-  stop: () => server.shutdown(),
-}
+export default createServer

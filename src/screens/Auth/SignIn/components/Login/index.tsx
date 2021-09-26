@@ -14,12 +14,8 @@ import * as yup from 'yup'
 
 import * as actions from '@store/modules/auth/actions'
 
-import server from '@server/app'
-
 import styles from './styles'
 import { State, useLogin } from './useLogin'
-
-server.start()
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -43,7 +39,6 @@ const Login = () => {
   useEffect(() => {
     switch (result[0]) {
       case State.SUCCESS: {
-        server.stop()
         const [, user] = result
         Snackbar.show({
           text: `Login realizado por ${user.name}`,
