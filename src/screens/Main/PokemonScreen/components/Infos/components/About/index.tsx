@@ -2,18 +2,15 @@ import React from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-paper'
 
+import { IAbout } from '@services/api/pokemon/types'
+
 import styles from './styles'
 
-export type AboutItem = {
-  name: string
-  value: string | string[]
-}
-
 type Props = {
-  about: AboutItem[]
+  about: IAbout[]
 }
 
-const Infos = (props: Props) => {
+const About = (props: Props) => {
   const { about = [] } = props
 
   return (
@@ -34,4 +31,4 @@ const Infos = (props: Props) => {
   )
 }
 
-export default Infos
+export default About

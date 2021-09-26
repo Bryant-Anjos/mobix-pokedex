@@ -32,7 +32,11 @@ const PokemonScreen = (props: Props) => {
           <Header name={pokemon.name} number={pokemon.id} />
           <Types color={pokemon.color} types={pokemon.types} />
           <Sprite colorPalete={pokemon.palete} image={pokemon.image} />
-          <Infos color={pokemon.color} about={pokemon.about} />
+          <Infos
+            color={pokemon.color}
+            about={pokemon.about}
+            stats={pokemon.stats}
+          />
         </ScrollView>
       )
     }

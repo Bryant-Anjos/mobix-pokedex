@@ -12,6 +12,11 @@ export interface IAbout {
   value: string | string[]
 }
 
+export interface IStats {
+  name: string
+  value: number
+}
+
 export interface IPokemonDetail {
   id: number
   name: string
@@ -20,6 +25,7 @@ export interface IPokemonDetail {
   image: string
   palete: [string, string, string]
   about: IAbout[]
+  stats: IStats[]
 }
 
 const get = async (id: number): Promise<IPokemonDetail> => {
@@ -54,6 +60,10 @@ const get = async (id: number): Promise<IPokemonDetail> => {
         value: getPokemonGenders(species.gender_rate),
       },
     ]
+    const stats: IStats[] = pokemon.stats.map((item: any) => ({
+      name: item.stat.name,
+      value: item.base_stat,
+    }))
 
     return {
       id,
@@ -63,6 +73,7 @@ const get = async (id: number): Promise<IPokemonDetail> => {
       image,
       palete,
       about,
+      stats,
     } as IPokemonDetail
   })
 }
