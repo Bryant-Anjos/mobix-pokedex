@@ -6,8 +6,8 @@ import styles from './styles'
 
 export type Tab = {
   name: string
-  component: React.FC
-  props?: React.ComponentProps<Tab['component']>
+  component: (args: any) => JSX.Element
+  props?: any
 }
 
 type Props = {

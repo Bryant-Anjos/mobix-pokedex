@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import About from './components/About'
+import About, { AboutItem } from './components/About'
 import Evolution from './components/Evolution'
 import Status from './components/Status'
 import Tabs, { Tab } from './components/Tabs'
@@ -9,18 +9,17 @@ import styles from './styles'
 
 type Props = {
   color: string
+  about: AboutItem[]
 }
 
 const Infos = (props: Props) => {
-  const { color } = props
+  const { about, color } = props
 
   const tabs: Tab[] = [
     {
       name: 'Sobre',
-      component: About as React.FC,
-      props: {
-        children: 'Sobre',
-      },
+      component: About,
+      props: { about },
     },
     {
       name: 'Status',

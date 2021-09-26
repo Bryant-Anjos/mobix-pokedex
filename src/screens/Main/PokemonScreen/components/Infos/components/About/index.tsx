@@ -2,18 +2,34 @@ import React from 'react'
 import { View } from 'react-native'
 import { Text } from 'react-native-paper'
 
-// import styles from './styles'
+import styles from './styles'
+
+export type AboutItem = {
+  name: string
+  value: string | string[]
+}
 
 type Props = {
-  children: string
+  about: AboutItem[]
 }
 
 const Infos = (props: Props) => {
-  const { children } = props
+  const { about = [] } = props
 
   return (
     <View>
-      <Text>{children}</Text>
+      {about.map(item => (
+        <View key={item.name} style={styles.item}>
+          <View style={styles.left}>
+            <Text style={styles.textLeft}>{item.name}</Text>
+          </View>
+          <View style={styles.right}>
+            <Text style={styles.textRight}>
+              {Array.isArray(item.value) ? item.value.join(', ') : item.value}
+            </Text>
+          </View>
+        </View>
+      ))}
     </View>
   )
 }

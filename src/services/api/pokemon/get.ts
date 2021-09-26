@@ -1,7 +1,16 @@
-import api from './api'
+import axios from 'axios'
+
+import api from '@services/api'
 import { mapTypeToColor } from '@utils/mapTypeToColor'
 import { getGradient } from '@utils/getGradient'
 import { getPokemonImage } from '@utils/getPokemonImage'
+import { calculatePokemonHeight } from '@utils/calculatePokemonHeight'
+import { getPokemonGenders } from '@utils/getPokemonGenders'
+
+export interface IAbout {
+  name: string
+  value: string | string[]
+}
 
 export interface IPokemonDetail {
   id: number
@@ -10,6 +19,7 @@ export interface IPokemonDetail {
   color: string
   image: string
   palete: [string, string, string]
+  about: IAbout[]
 }
 
 const get = async (id: number): Promise<IPokemonDetail> => {
@@ -19,6 +29,31 @@ const get = async (id: number): Promise<IPokemonDetail> => {
     const color = mapTypeToColor(types[0])
     const image = getPokemonImage(id)
     const palete = getGradient(color)
+    const { data: species } = await axios.get(pokemon.species.url)
+    const about: IAbout[] = [
+      {
+        name: 'Espécie',
+        value:
+          species.genera.find((item: any) => item.language.name === 'en')
+            ?.genus ?? '',
+      },
+      {
+        name: 'Tamanho',
+        value: calculatePokemonHeight(pokemon.height),
+      },
+      {
+        name: 'Habilidades',
+        value: pokemon.abilities.map((item: any) => {
+          return item.is_hidden
+            ? `${item.ability.name} (hidden)`
+            : item.ability.name
+        }),
+      },
+      {
+        name: 'Gênero',
+        value: getPokemonGenders(species.gender_rate),
+      },
+    ]
 
     return {
       id,
@@ -27,6 +62,7 @@ const get = async (id: number): Promise<IPokemonDetail> => {
       color,
       image,
       palete,
+      about,
     } as IPokemonDetail
   })
 }

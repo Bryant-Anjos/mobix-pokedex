@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import api from './api'
+import api from '@services/api'
 import { mapTypeToColor } from '@utils/mapTypeToColor'
 import { getGradient } from '@utils/getGradient'
 import { getPokemonImage } from '@utils/getPokemonImage'
