@@ -4,7 +4,12 @@ import { Text, TouchableRipple } from 'react-native-paper'
 
 import styles from './styles'
 
-const Type = () => {
+type Props = {
+  children: string
+}
+
+const Type = (props: Props) => {
+  const { children } = props
   const [selected, setSelected] = useState(false)
 
   const toggle = () => {
@@ -17,7 +22,9 @@ const Type = () => {
       onPress={toggle}
       style={[styles.button, selected && styles.buttonSelected]}
     >
-      <Text style={[styles.text, selected && styles.textSelected]}>Type</Text>
+      <Text style={[styles.text, selected && styles.textSelected]}>
+        {children}
+      </Text>
     </TouchableRipple>
   )
 }

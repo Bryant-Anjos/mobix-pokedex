@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     color: '#6B6060',
     fontSize: 12,
     fontWeight: 'bold',
+    textTransform: 'capitalize',
   },
   textSelected: {
     color: Colors.white,
