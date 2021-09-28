@@ -22,13 +22,13 @@ const Pokemons = (props: Props) => {
   useEffect(() => {
     listPokemonsByType(type)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [type])
 
   useEffect(() => {
     switch (result[0]) {
       case State.SUCCESS: {
         const [, newPokemons] = result
-        setPokemons(p => [...p, ...newPokemons])
+        setPokemons(newPokemons)
         break
       }
       case State.FAILURE: {
