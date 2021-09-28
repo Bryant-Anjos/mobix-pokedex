@@ -18,7 +18,7 @@ const Pokemon = (props: Props) => {
 
   const navigateToPokemonScreen = () => {
     navigation.navigate('PokemonScreen', {
-      pokemonNumber: pokemon.id,
+      pokemonId: pokemon.id,
     })
   }
 

@@ -16,7 +16,7 @@ type Result =
   | [State.SUCESS, IPokemonDetail]
   | [State.FAILURE, Error]
 
-export const useGetPokemon = (id: number) => {
+export const useGetPokemon = (id: number | string) => {
   const [result, setResult] = useState<Result>([State.IDLE, undefined])
 
   useEffect(() => {

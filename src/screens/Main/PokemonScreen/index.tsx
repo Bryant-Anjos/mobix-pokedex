@@ -1,5 +1,6 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import { ActivityIndicator, Text } from 'react-native-paper'
 
 import Header from './components/Header'
 import Infos from './components/Infos'
@@ -11,16 +12,22 @@ import { State, useGetPokemon } from './useGetPokemon'
 type Props = {
   route: {
     params: {
-      pokemonNumber: number
+      pokemonId: number | string
     }
   }
 }
 
 const PokemonScreen = (props: Props) => {
-  const { pokemonNumber } = props.route.params
-  const result = useGetPokemon(pokemonNumber)
+  const { pokemonId } = props.route.params
+  const result = useGetPokemon(pokemonId)
 
   switch (result[0]) {
+    case State.LOADING:
+      return (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" />
+        </View>
+      )
     case State.SUCESS: {
       const [, pokemon] = result
 
@@ -41,6 +48,12 @@ const PokemonScreen = (props: Props) => {
         </ScrollView>
       )
     }
+    case State.FAILURE:
+      return (
+        <View style={styles.center}>
+          <Text>Pokémon não encontrado 😔</Text>
+        </View>
+      )
     default:
       return <></>
   }

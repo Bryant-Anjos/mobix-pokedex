@@ -8,7 +8,7 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       PokedexScreen: undefined
-      PokemonScreen: { pokemonNumber: number }
+      PokemonScreen: { pokemonId: number | string }
     }
   }
 }

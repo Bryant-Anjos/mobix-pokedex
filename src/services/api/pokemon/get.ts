@@ -27,7 +27,7 @@ export interface IPokemonDetail {
   evolution: IEvolution[]
 }
 
-const get = async (id: number): Promise<IPokemonDetail> => {
+const get = async (id: number | string): Promise<IPokemonDetail> => {
   return await api
     .get(`pokemon/${id}`)
     .then(({ data: pokemon }: any) => mapPokemonFull(pokemon))

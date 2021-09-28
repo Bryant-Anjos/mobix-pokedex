@@ -19,9 +19,9 @@ const Evolution = (props: Props) => {
   const navigation = useNavigation<StackNavigationProp<any>>()
 
   const navigateToPokemonScreen = useCallback(
-    (pokemonNumber: number) => {
+    (pokemonId: number) => {
       navigation.push('PokemonScreen', {
-        pokemonNumber,
+        pokemonId,
       })
     },
     [navigation],
