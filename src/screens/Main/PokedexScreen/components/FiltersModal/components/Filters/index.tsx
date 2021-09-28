@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Button, IconButton, Text } from 'react-native-paper'
+import { useDispatch } from 'react-redux'
+
+import { selectType } from '@store/modules/filter/actions'
 
 import styles from './styles'
 import Types from './components/Types'
@@ -11,6 +14,22 @@ type Props = {
 
 const Filters = (props: Props) => {
   const { closeModal } = props
+  const dispatch = useDispatch()
+
+  const [selected, setSelected] = useState<string>()
+
+  const cleanFilter = () => {
+    setSelected(undefined)
+  }
+
+  const onPressType = (type: string) => {
+    setSelected(type)
+  }
+
+  const applyFilter = () => {
+    dispatch(selectType(selected))
+    closeModal?.()
+  }
 
   return (
     <View style={styles.wrapper}>
@@ -18,7 +37,7 @@ const Filters = (props: Props) => {
         <View style={styles.header}>
           <View style={styles.row}>
             <Text style={styles.title}>Filtro</Text>
-            <TouchableOpacity onPress={() => console.log('pressed')}>
+            <TouchableOpacity onPress={cleanFilter}>
               <Text style={styles.clean}>Limpar filtros</Text>
             </TouchableOpacity>
           </View>
@@ -28,7 +47,7 @@ const Filters = (props: Props) => {
 
         <View style={styles.typesWrapper}>
           <Text style={styles.subtitle}>Tipo</Text>
-          <Types />
+          <Types selected={selected} onPress={onPressType} />
         </View>
       </View>
 
@@ -37,7 +56,7 @@ const Filters = (props: Props) => {
           mode="contained"
           style={styles.button}
           labelStyle={styles.buttonText}
-          onPress={closeModal}
+          onPress={applyFilter}
         >
           Aplicar
         </Button>

@@ -4,11 +4,13 @@ import { ApplicationState } from '@store/types'
 
 import auth from './auth/reducer'
 import { AuthTypes } from './auth/types'
+import filter from './filter/reducer'
 
 type Reducers = keyof ApplicationState
 
 const appReducer = combineReducers({
   auth,
+  filter,
 })
 
 const blacklist: Reducers[] = []

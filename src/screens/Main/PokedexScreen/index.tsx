@@ -8,17 +8,20 @@ import {
 } from 'react-native'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { IconButton } from 'react-native-paper'
+import { useSelector } from 'react-redux'
 
 import logo from '@assets/logo.png'
+import { ApplicationState } from '@store/types'
 
 import styles from './styles'
 import Chips from './components/Chips'
 import FiltersModal, { FiltersModalRef } from './components/FiltersModal'
-import Pokemons from './components/Pokemons'
+import { PokemonsListAll, PokemonsListByType } from './components/Pokemons'
 import Search from './components/Search'
-import { IconButton } from 'react-native-paper'
 
 const ListScreen = () => {
+  const type = useSelector((state: ApplicationState) => state.filter.type)
   const modalRef = useRef<FiltersModalRef>(null)
 
   const dismiss = useCallback(() => {
@@ -44,7 +47,7 @@ const ListScreen = () => {
             <FiltersModal ref={modalRef} />
           </View>
           <Chips />
-          <Pokemons />
+          {type ? <PokemonsListByType type={type} /> : <PokemonsListAll />}
         </SafeAreaView>
       </KeyboardAvoidingView>
     </TouchableWithoutFeedback>

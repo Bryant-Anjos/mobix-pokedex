@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, View } from 'react-native'
+import Snackbar from 'react-native-snackbar'
+import { ActivityIndicator, Colors } from 'react-native-paper'
 
 import { IPokemon } from '@services/api/pokemon/types'
 
-import Pokemon from './components/Pokemon'
+import Pokemon from '../components/Pokemon'
 import styles from './styles'
-import { State, useListPokemons } from './useListPokemons'
-import { ActivityIndicator } from 'react-native-paper'
+import { State, useListPokemonsByType } from './useListPokemonsByType'
 
-const Pokemons = () => {
-  const { result, listPokemons } = useListPokemons()
+type Props = {
+  type: string
+}
+
+const Pokemons = (props: Props) => {
+  const { type } = props
+  const { result, listPokemonsByType } = useListPokemonsByType()
 
   const [pokemons, setPokemons] = useState<IPokemon[]>([])
 
   useEffect(() => {
-    listPokemons()
+    listPokemonsByType(type)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -25,15 +31,20 @@ const Pokemons = () => {
         setPokemons(p => [...p, ...newPokemons])
         break
       }
+      case State.FAILURE: {
+        Snackbar.show({
+          text: 'Ocorreu um erro ao listar os Pokémons',
+          duration: Snackbar.LENGTH_LONG,
+          backgroundColor: Colors.red500,
+        })
+        break
+      }
     }
   }, [result])
 
-  const renderFooter = () => {
-    if (result[0] !== State.LOADING) {
-      return null
-    }
+  if (result[0] === State.LOADING) {
     return (
-      <View style={styles.loading}>
+      <View>
         <ActivityIndicator />
       </View>
     )
@@ -48,9 +59,6 @@ const Pokemons = () => {
       data={pokemons}
       keyExtractor={pokemon => pokemon.name}
       renderItem={({ item }) => <Pokemon pokemon={item} />}
-      onEndReached={listPokemons}
-      onEndReachedThreshold={0.1}
-      ListFooterComponent={renderFooter}
     />
   )
 }

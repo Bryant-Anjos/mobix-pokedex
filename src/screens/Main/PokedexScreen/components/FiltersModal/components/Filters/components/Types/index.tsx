@@ -7,7 +7,13 @@ import Type from './components/Type'
 import styles from './styles'
 import { State, useListTypes } from './useListTypes'
 
-const Types = () => {
+type Props = {
+  onPress(type: string | undefined): void
+  selected: string | undefined
+}
+
+const Types = (props: Props) => {
+  const { onPress, selected } = props
   const result = useListTypes()
 
   switch (result[0]) {
@@ -23,9 +29,16 @@ const Types = () => {
           contentContainerStyle={styles.content}
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          data={types}
+          data={['Todos', ...types]}
           keyExtractor={type => type}
-          renderItem={({ item }) => <Type>{item}</Type>}
+          renderItem={({ item }) => (
+            <Type
+              onPress={() => onPress(item !== 'Todos' ? item : undefined)}
+              selected={selected}
+            >
+              {item}
+            </Type>
+          )}
         />
       )
     }
