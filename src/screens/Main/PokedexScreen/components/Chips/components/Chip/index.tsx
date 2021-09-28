@@ -7,7 +7,7 @@ import styles from './styles'
 
 type Props = {
   children: string
-  onPressClose?: (type: string) => void
+  onPressClose?: () => void
 }
 
 const Chip = (props: Props) => {
@@ -15,12 +15,10 @@ const Chip = (props: Props) => {
 
   return (
     <View style={styles.view}>
-      <PaperChip style={styles.chip}>{children}</PaperChip>
-      <Badge
-        visible
-        style={styles.badge}
-        onPress={() => onPressClose?.(children)}
-      >
+      <PaperChip style={styles.chip} textStyle={styles.text}>
+        {children}
+      </PaperChip>
+      <Badge visible style={styles.badge} onPress={onPressClose}>
         {(<Icon name="close" color="white" size={10} />) as any}
       </Badge>
     </View>

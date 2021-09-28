@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
     right: 5,
     backgroundColor: '#00000060',
   },
+  text: {
+    textTransform: 'capitalize',
+  },
 })
 
 export default styles
