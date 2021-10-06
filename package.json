@@ -9,7 +9,7 @@
     "prepare": "husky install",
     "commit": "cz",
     "build-storybook": "build-storybook -o docs",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:watch": "jest --watchAll",
     "format": "prettier --write ./src/**/*.{ts,tsx}",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
